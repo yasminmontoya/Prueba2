@@ -18,14 +18,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('clients','api\ClientController@getAll');
-
 Route::group(['middleware' => ['jwt.auth'] , 'prefix' => 'v1' ], function(){
-
+    Route::get('clients','api\ClientController@getAll');
 });
 
 Route::group(['middleware' => [] , 'prefix' => 'v1' ], function(){
     Route::post('/auth/refresh', 'TokensController@refreshToken');
-    Route::get('/auth/expire', 'TokensController@expireToken');
+    Route::get('/auth/logout', 'TokensController@logout');
     Route::post('/auth/login', 'TokensController@login');
 });
