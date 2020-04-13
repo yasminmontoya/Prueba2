@@ -18,8 +18,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('clients','api\ClientController@getAll');
+
 Route::group(['middleware' => ['jwt.auth'] , 'prefix' => 'v1' ], function(){
-    
+
 });
 
 Route::group(['middleware' => [] , 'prefix' => 'v1' ], function(){
